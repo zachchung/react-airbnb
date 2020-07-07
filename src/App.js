@@ -14,7 +14,7 @@ class App extends Component {
       allFlats: [],
       selectedFlat: null,
       search: ""
-    };
+    }; // need allFlats for handleSearch which lost all flats
   }
 
   // call API (componentDidMount is called at React - no need to call)
@@ -24,10 +24,10 @@ class App extends Component {
     .then((data) => {
       // console.log(data);
       this.setState({
-        allFlats: data,
         flats: data,
-        selectedFlat: data[0]
-      })
+        allFlats: data,
+        // selectedFlat: data[0]
+      }) // need allFlats for handleSearch which lost all flats
     })
   }
 
@@ -74,8 +74,8 @@ class App extends Component {
             zoom={14}>
             {this.state.flats.map((flat) => {
               return <Marker key={flat.name} lat={flat.lat} lng={flat.lng} text={flat.price} selected={flat === this.state.selectedFlat}/>
-            })} // if flat selected, change color to yellow
-          </GoogleMapReact>
+            })}
+          </GoogleMapReact> // if flat selected, change color to yellow
         </div>
       </div>
     ); // key={flat.name} to remove chrome console error (needed whenever loop)
